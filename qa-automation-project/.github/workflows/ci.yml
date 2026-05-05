@@ -1,0 +1,41 @@
+name: Pipeline QA
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies (API)
+        run: |
+          cd api-tests
+          pip install -r requirements.txt
+
+      - name: Run API tests
+        run: |
+          cd api-tests
+          pytest
+
+      - name: Install dependencies (Web)
+        run: |
+          cd web-tests
+          pip install -r requirements.txt
+
+      - name: Run Web tests
+        run: |
+          cd web-tests
+          pytest
