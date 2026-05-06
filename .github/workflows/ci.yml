@@ -22,12 +22,12 @@ jobs:
 
       - name: Install dependencies (API)
         run: |
-          cd api-tests
+          cd qa-automation-project/api-tests
           pip install -r requirements.txt
 
       - name: Run API tests
         run: |
-          cd api-tests
+          cd qa-automation-project/api-tests
           pytest
 
       - name: Install dependencies (Web)
@@ -37,5 +37,5 @@ jobs:
 
       - name: Run Web tests
         run: |
-          cd web-tests
+          cd qa-automation-project/web-tests
           pytest
