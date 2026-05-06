@@ -1,3 +1,4 @@
+import os
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -8,7 +9,10 @@ class LoginPage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-    def login(self, usuario, senha):
+    def login(self, usuario=None, senha=None):
+        usuario = usuario or os.getenv("LOGIN_USER")
+        senha = senha or os.getenv("LOGIN_PASSWORD")
+
         campo_user = self.wait.until(
             EC.presence_of_element_located((By.ID, "user-name"))
         )
