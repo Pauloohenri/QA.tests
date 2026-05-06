@@ -51,7 +51,10 @@ def test_checkout_sem_dados(driver):
     produtos.ir_para_carrinho()
     carrinho.iniciar_checkout()
 
+    WebDriverWait(driver, 10).until(EC.url_contains("checkout-step-one"))    
+
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "continue"))).click()
 
     erro = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "h3[data-test='error']")))
+
     assert "First Name is required" in erro.text
