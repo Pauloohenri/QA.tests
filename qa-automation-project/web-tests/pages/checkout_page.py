@@ -9,9 +9,9 @@ class CheckoutPage:
         self.wait = WebDriverWait(driver, 10)
 
     def preencher_dados(self):
-        self.wait.until(EC.presence_of_element_located((By.ID, "first-name"))).send_keys("Paulo")
-        self.wait.until(EC.presence_of_element_located((By.ID, "last-name"))).send_keys("Teste")
-        self.wait.until(EC.presence_of_element_located((By.ID, "postal-code"))).send_keys("12345")
+        self.wait.until(EC.visibility_of_element_located((By.ID, "first-name"))).send_keys("Paulo")
+        self.wait.until(EC.visibility_of_element_located((By.ID, "last-name"))).send_keys("Teste")
+        self.wait.until(EC.visibility_of_element_located((By.ID, "postal-code"))).send_keys("12345")
         self.wait.until(EC.element_to_be_clickable((By.ID, "continue"))).click()
 
     def finalizar(self):
