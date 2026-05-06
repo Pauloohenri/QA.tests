@@ -1,10 +1,12 @@
 import sys
 import os
 
-# corrige caminho dos imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 from pages.cart_page import CartPage
@@ -31,7 +33,8 @@ def test_deve_finalizar_compra(driver):
     checkout.preencher_dados()
     checkout.finalizar()
 
-    assert "Thank you" in checkout.mensagem_sucesso()
+    mensagem = checkout.mensagem_sucesso()
+    assert "Thank you" in mensagem
 
 
 def test_checkout_sem_dados(driver):
@@ -48,7 +51,7 @@ def test_checkout_sem_dados(driver):
     produtos.ir_para_carrinho()
     carrinho.iniciar_checkout()
 
-    driver.find_element(By.ID, "continue").click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "continue"))).click()
 
-    erro = driver.find_element(By.CSS_SELECTOR, "h3[data-test='error']")
+    erro = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "h3[data-test='error']")))
     assert "First Name is required" in erro.text
