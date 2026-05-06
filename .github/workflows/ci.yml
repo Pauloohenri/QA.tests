@@ -36,6 +36,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Web tests
+        env:
+          LOGIN_USER: ${{ secrets.LOGIN_USER }}
+          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         run: |
           cd qa-automation-project/web-tests
           pytest
