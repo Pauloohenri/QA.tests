@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies (Web)
         run: |
-          cd web-tests
+          cd qa-automation-project/web-tests
           pip install -r requirements.txt
 
       - name: Run Web tests
