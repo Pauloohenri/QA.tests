@@ -30,7 +30,7 @@ def test_remover_produto_do_carrinho(driver):
 
     driver.find_element(By.CSS_SELECTOR, "[data-test^='remove']").click()
 
-    WebDriverWait(driver, 10).until(lambda d: len(d.find_elements(By.CLASS_NAME, "cart_item")) == 0)
-
+    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, "cart_item")))
+    
     itens = driver.find_elements(By.CLASS_NAME, "cart_item")
     assert len(itens) == 0
