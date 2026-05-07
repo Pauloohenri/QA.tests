@@ -23,4 +23,12 @@ class ProductsPage:
             botoes[i].click()
 
     def ir_para_carrinho(self):
-        self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+        self.wait.until(
+            EC.element_to_be_clickable(
+                (By.CLASS_NAME, "shopping_cart_link")
+            )
+        ).click()
+
+        self.wait.until(
+            EC.url_contains("cart")
+        )
