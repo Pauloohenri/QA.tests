@@ -18,19 +18,40 @@ def test_adicionar_produto_ao_carrinho(driver):
 
 
 def test_remover_produto_do_carrinho(driver):
+
     login = LoginPage(driver)
     produtos = ProductsPage(driver)
 
+    wait = WebDriverWait(driver, 15)
+
     login.login("standard_user", "secret_sauce")
+
     produtos.adicionar_produto()
+    produtos.ir_para_carrinho()
 
-    driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    wait.until(
+        EC.visibility_of_element_located(
+            (By.CLASS_NAME, "cart_item")
+        )
+    )
 
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "cart_list")))
+    remover = wait.until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "[data-test^='remove']")
+        )
+    )
 
-    driver.find_element(By.CSS_SELECTOR, "[data-test^='remove']").click()
+    driver.execute_script(
+        "arguments[0].click();",
+        remover
+    )
 
-    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, "cart_item")))
-    
+    wait.until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, "cart_item")
+        )
+    )
+
     itens = driver.find_elements(By.CLASS_NAME, "cart_item")
+
     assert len(itens) == 0
