@@ -27,5 +27,5 @@ class CartPage:
         checkout_btn.click()
 
         self.wait.until(
-            EC.url_contains("checkout-step-one")
+            EC.presence_of_element_located((By.ID, "first-name"))
         )
