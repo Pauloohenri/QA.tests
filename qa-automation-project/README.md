@@ -117,7 +117,7 @@ TESTEQA/
 ## 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+git clone https://github.com/Pauloohenri/QA.tests.git
 ```
 
 ---
@@ -188,22 +188,6 @@ pytest -v
 
 Os testes WEB utilizam variáveis de ambiente para autenticação.
 
-## Windows PowerShell
-
-```powershell
-$env:LOGIN_USER="standard_user"
-$env:LOGIN_PASSWORD="secret_sauce"
-```
-
----
-
-## Linux/Mac
-
-```bash
-export LOGIN_USER=standard_user
-export LOGIN_PASSWORD=secret_sauce
-```
-
 ---
 
 # Pipeline CI/CD
@@ -236,15 +220,15 @@ Arquivo responsável:
 
 # Evidências
 
-Adicionar prints da execução dos testes:
+## Testes WEB
 
-- Testes WEB passando
-- Testes API passando
-- Pipeline do GitHub Actions
-- Fluxo de compra funcionando
+![Testes WEB](prints/webtests.png)
 
 ---
 
+## Testes API
+
+![Testes API](prints/apitests.png)
 # Autor
 
 Paulo Henrique
